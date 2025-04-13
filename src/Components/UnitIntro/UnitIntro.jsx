@@ -9,21 +9,21 @@ export default function UnitIntro() {
     queryKey: ["units"],
     queryFn: getUnits,
   });
-  console.log(units);
+//   console.log(units);
 
   return (
     <div className="mb-4">
-      {units && units.length > 0 && (
+      {units && units?.length > 0 && (
         <div className="w-full flex lg:flex-row flex-col gap-6 lg:gap-0 py-6 justify-between items-center border-primary border-2 rounded-xl  lg:py-6 lg:px-6">
           <div className="flex justify-start items-center gap-4">
             <img src={chemist} alt="chemist" />
             <div className="flex-col ">
-              <p className="font-bold mb-2">{units[0].name}</p>
+              <p className="font-bold mb-2">{units[0]?.name}</p>
               <p className="text-secondary">
                 لا تدع التقدم الذي حققته يضيع. أنهي ما بدأت.
               </p>
               <div className="w-[95%] bg-gray-200 rounded-full  mt-4">
-                    <div className="bg-primary h-2 rounded-full" style={{ width: '48%' }}></div>
+                    <div className="bg-primary h-3 rounded-full" style={{ width: '48%' }}></div>
                   </div>
             </div>
           </div>

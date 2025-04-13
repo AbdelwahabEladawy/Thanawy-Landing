@@ -8,7 +8,7 @@ export default function HomeContent() {
   return (
     <>
       <div className="xl:w-[70%] w-full">
-        <UnitIntro />
+       <UnitIntro/>
         <SubjectsSlider />
         <Accordion />
       </div>
