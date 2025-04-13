@@ -2,7 +2,7 @@ const BASE_URL = "https://backend.thanawy.com"
 export const getSubjects = async () => {
   try {
    
-    const response = await fetch('/api/subjects')
+    const response = await fetch('${BASE_URL}/subjects')
 
     if (!response.ok) {
       throw new Error("")
@@ -19,7 +19,7 @@ export const getUnits = async () => {
     
   try {
    
-    const response = await fetch('/api/units?subjects/6a345cc6-d251-423a-9712-81c89662d4e9')
+    const response = await fetch('${BASE_URL}/units?subjects/6a345cc6-d251-423a-9712-81c89662d4e9')
 
     if (!response.ok) {
       throw new Error("")
