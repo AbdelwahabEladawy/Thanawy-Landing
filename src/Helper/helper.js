@@ -1,30 +1,49 @@
-const isLocal = typeof window !== "undefined" && window.location.hostname === "localhost";
-const BASE_URL = isLocal ? "/api" : "https://backend.thanawy.com";
-
-export const getSubjects = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/subjects`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch subjects");
+const getBaseUrl = () => {
+    if (typeof window !== "undefined") {
+      // Running on the client (browser)
+      return window.location.hostname === "localhost"
+        ? "http://localhost:3000/api"
+        : "https://backend.thanawy.com";
     }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Fetch error details:", error);
-    throw error;
-  }
-};
-
-export const getUnits = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/subjects/6a345cc6-d251-423a-9712-81c89662d4e9`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch units");
+  
+    // Default fallback for SSR/server or environments without `window`
+    return "https://backend.thanawy.com";
+  };
+  
+  const BASE_URL = getBaseUrl();
+  
+  // جلب المواد
+  export const getSubjects = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/subjects`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch subjects");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Fetch error details:", error);
+      throw error;
     }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Fetch error details:", error);
-    throw error;
-  }
-};
+  };
+  
+  // جلب الوحدات بناءً على subjectId
+  export const getUnits = async (subjectId) => {
+    try {
+      if (!subjectId) {
+        throw new Error("subjectId is required to fetch units");
+      }
+  
+      const response = await fetch(`${BASE_URL}/subjects/${subjectId}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch units");
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Fetch error details:", error);
+      throw error;
+    }
+  };
+  
